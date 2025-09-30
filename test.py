@@ -58,7 +58,7 @@ Total_cost = model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="Total_cost")
 model.addConstrs((quicksum(X[t, j] for j in range(N)) == 1 for t in range(T)), name="one_unit_per_time")
 
 # 总运量约束
-model.addConstr(quicksum(X[t, j] * flow_rate[j] for t in range(T) for j in range(N)) >= SUM_volume, name="volume_def")
+model.addConstr(quicksum(X[t, j] * flow_rate[j] for t in range(T) for j in range(N)) / 60 >= SUM_volume, name="volume_def")
 #model.addConstr(quicksum(X[t, j] * flow_rate[j] for t in range(T) for j in range(N)) <= SUM_volume + 1000, name="volume_def")
 
 # 瞬时流量约束
